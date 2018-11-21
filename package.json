@@ -1,0 +1,20 @@
+{
+  "name": "Techdegree-Project-12",
+  "version": "1.0.0",
+  "description": "My final techdegree project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivansard/Techdegree-Project-12.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivansard/Techdegree-Project-12/issues"
+  },
+  "homepage": "https://github.com/ivansard/Techdegree-Project-12#readme"
+}
