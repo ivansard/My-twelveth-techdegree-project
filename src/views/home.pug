@@ -1,0 +1,139 @@
+extends layout.pug
+block content
+    .jumbotron.jumbotron-fluid.bg-info.text-white
+      .container.text-sm-center.pt-5
+        h1.display-3 Full Stack Conf
+        p.lead A conference for everything JavaScript
+        .btn-group.mt-4(role='group', aria-label='Callout buttons')
+          button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#register') Register now
+          a.btn.btn-light.btn-lg(href='#speakers') Speakers
+    #about.container.pt-4
+      .row
+        .col-lg.order-lg-2
+          h3.mb-4 About Ticket Search
+          img.img-fluid.mb-4.rounded.d-none.d-sm-block(src='./img/pdx.jpg', alt='Portland')
+          p
+            | The beautiful city of Portland, Oregon will be the host city for Full Stack Conf!
+          p
+            | Explore the future of JavaScript with a lineup of industry professionals. Discover new techniques to advance your career as a web developer.
+        .col-lg.order-lg-1
+          h3.mb-4 Your favorite festival a click away
+          p
+            | Our expert speaker lineup was just announced, so don&apos;t wait too long before grabbing your tickets!
+          p
+            | Want to meet the international JavaScript community and share skills with some of the world&apos;s top experts, hackers, and makers? Be the first to know what to expect for the future of JavaScript.
+          p
+            | Full Stack Conf is committed to being inclusive and welcoming for everyone. We look forward to another intensive day of learning and sharing.
+        .col-lg.order-lg-3
+          h3.mb-4 Covered festivals
+          .list-group
+            a.list-group-item.list-group-item-action(href='#')
+              strong MongoDB
+              | : NoSQL database
+            a.list-group-item.list-group-item-action(href='#')
+              strong Express
+              | : Framework for Node
+      h1#speakers.display-4.text-center.my-5.text-muted Where you could end up  
+      .row
+        .col-md-6.col-lg-4
+          .card.mb-3
+            img.card-img-top(src='./img/vivianne.png', alt='Vivianne')
+            .card-body
+              h4.card-title Vivianne McVue
+              p.card-text
+                | Vivianne is a web developer and teacher who is passionate about building scalable, data-driven web apps, especially ones that address old problems with new tech!
+        .col-md-6.col-lg-4
+          .card.mb-3
+            img.card-img-top(src='./img/robbie.png', alt='Robbie')
+            .card-body
+              h4.card-title Vivianne McVue
+              p.card-text
+                | Vivianne is a web developer and teacher who is passionate about building scalable, data-driven web apps, especially ones that address old problems with new tech!
+      h1.display-4.text-center.my-5.text-muted Upcoming festivals
+      ul#schedule.list-group
+        li.list-group-item
+          .d-flex.justify-content-between
+            h5 Beginning
+            h5 I&apos;m in the middle
+            span.badge.badge-pill.badge-info 10:00am
+          p And im speaking
+        li.list-group-item
+          .d-flex.justify-content-between
+            h5 Beginning
+            h5 I&apos;m in the middle
+            span.badge.badge-pill.badge-info 10:00am
+        li.list-group-item.list-group-item-success
+          .d-flex.justify-content-between
+            h5 Beginning
+            h5 I&apos;m in the middle
+            span.badge.badge-pill.badge-info 10:00am
+      button.btn.btn-outline-info.btn-lg.d-block.mx-auto.my-5(type='button', data-toggle='modal', data-target='#register') Don&apos;t Miss Out, Register Now
+block modal
+    #register.modal.fade(tabindex='-1', role='dialog', aria-labelledby='register form', aria-hidden='true')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header.bg-info.text-white
+            h5#exampleModalLongTitle.modal-title Register for Conf
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            form
+              .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+                strong Hurry!
+                |  Discount period lasts only two more days!
+                button.close(type='button', data-dismiss='alert', aria-label='Close')
+                  span(aria-hidden='true') &times;
+              h5.mb-5 Basic info
+              .form-group
+                label(for='name') Name:
+                input#name.form-control(type='text')
+              .form-group
+                label(for='email') Email:
+                input#email.form-control(type='email')
+              .form-group
+                label(for='role') Role:
+                select#role.form-control
+                  option(value='1') Role 1
+                  option(value='2') Role 2
+                  option(value='3') Role 3
+              hr.my-4
+              h5.mb-5 Which topics interest you the most
+              .form-check
+                label.form-check-label
+                  input.custom-control-input(type='checkbox')
+                  span.custom-control-indicator
+                  span.custom-control-description Node
+              .form-check
+                label.form-check-label
+                  input.custom-control-input(type='checkbox')
+                  span.custom-control-indicator
+                  span.custom-control-description Angular
+              .form-check
+                label.form-check-label
+                  input.custom-control-input(type='checkbox')
+                  span.custom-control-indicator
+                  span.custom-control-description React
+              hr.my-4
+              h5.mb-4 Payment info
+              .form-row
+                .col-lg-6.form-group
+                  label(for='cc-num') Card Number:
+                  input#cc-num.form-control(type='text')
+                .col-lg.form-group
+                  label(for='zip') Zip Code:
+                  input#zip.form-control(type='text')
+                .col-lg.form-group
+                  label(for='cvv') CVV:
+                  input#cvv.form-control(type='text')
+              .form-row
+                label.col-lg-12 Expiration date:
+                .form-group.col-lg-8
+                  select#exp-month.custom-select.form-control
+                    option(value='1') 1 - January
+                    option(value='2') 2 - February
+                .form-group.col-lg-4
+                  select#exp-year.custom-select.form-control
+                    option(value='2016') 2016
+                    option(value='2017') 2017
+              hr.my-4
+              button.btn.btn-primary(type='submit') Submit
