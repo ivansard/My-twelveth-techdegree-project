@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const FestivalSchema = new Schema({
     name: {type: String},
     country: {type: String},
+    description: {type: String},
     startDate: {type: Date},
     endDate: {type: Date},
     totalTicketsRegular: {type: Number},
