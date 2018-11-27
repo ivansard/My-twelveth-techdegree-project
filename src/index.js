@@ -25,13 +25,9 @@ app.use(bodyParser.json());
 
 const festivals = require('./routes/festivals');
 const users = require('./routes/users')
-const tickets = require('./routes/tickets')
-const reservations = require('./routes/reservations')
 
 app.use('/festivals', festivals);
 app.use('/users', users);
-app.use('/tickets', tickets);
-app.use('/reservations', reservations);
 
 //Setting pug as view engine
 app.set('view engine', 'pug');

@@ -2,73 +2,85 @@ extends layout.pug
 block content
     .jumbotron.jumbotron-fluid.bg-info.text-white
       .container.text-sm-center.pt-5
-        h1.display-3 Full Stack Conf
-        p.lead A conference for everything JavaScript
+        h1.display-3 Festival Helper
+        p.lead A guide to festival people, from festival people. Hope you enjoy
         .btn-group.mt-4(role='group', aria-label='Callout buttons')
-          button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#register') Register now
-          a.btn.btn-light.btn-lg(href='#speakers') Speakers
+          a(href='/users/register')
+            button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#register') Register now
+          a.btn.btn-light.btn-lg(href='#speakers') Festivals
     #about.container.pt-4
       .row
         .col-lg.order-lg-2
-          h3.mb-4 About Ticket Search
-          img.img-fluid.mb-4.rounded.d-none.d-sm-block(src='./img/pdx.jpg', alt='Portland')
+          h3.mb-4 Why?
           p
-            | The beautiful city of Portland, Oregon will be the host city for Full Stack Conf!
+            | We're very passionate about festivals, and have had are up and down experiences over the years, and we wanted to help others not fall in the same pitfalls
           p
-            | Explore the future of JavaScript with a lineup of industry professionals. Discover new techniques to advance your career as a web developer.
+            | This is our way of trying to make the festival experience of others much better
         .col-lg.order-lg-1
-          h3.mb-4 Your favorite festival a click away
+          h3.mb-4 What is Festival Guide?
           p
-            | Our expert speaker lineup was just announced, so don&apos;t wait too long before grabbing your tickets!
+            | A journey never ends for true festival people, and we are here to help you with choosing your next adventure
           p
-            | Want to meet the international JavaScript community and share skills with some of the world&apos;s top experts, hackers, and makers? Be the first to know what to expect for the future of JavaScript.
+            | Here you can post questions about your favorite festivals, get help and help out other adventure seekers
           p
-            | Full Stack Conf is committed to being inclusive and welcoming for everyone. We look forward to another intensive day of learning and sharing.
-        .col-lg.order-lg-3
-          h3.mb-4 Covered festivals
-          .list-group
-            a.list-group-item.list-group-item-action(href='#')
-              strong MongoDB
-              | : NoSQL database
-            a.list-group-item.list-group-item-action(href='#')
-              strong Express
-              | : Framework for Node
-      h1#speakers.display-4.text-center.my-5.text-muted Where you could end up  
+            | Apart from preparing for the next festival, you could find your adventure partners right here!
+      h1#speakers.display-4.text-center.my-5.text-muted Find your groove
+      p FESTIVAL CARDS SHOULD GO HERE
+      .album.py-5.bg-light
       .row
-        .col-md-6.col-lg-4
-          .card.mb-3
-            img.card-img-top(src='./img/vivianne.png', alt='Vivianne')
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', style='height: 225px; width: 100%; display: block;', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b256%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b256%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true')
             .card-body
-              h4.card-title Vivianne McVue
               p.card-text
-                | Vivianne is a web developer and teacher who is passionate about building scalable, data-driven web apps, especially ones that address old problems with new tech!
-        .col-md-6.col-lg-4
-          .card.mb-3
-            img.card-img-top(src='./img/robbie.png', alt='Robbie')
+                | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+              .d-flex.justify-content-between.align-items-center
+                .btn-group
+                  a(href='/festivals')
+                    button.btn.btn-sm.btn-outline-secondary(type='button') See More
+                small.text-muted 9 mins
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b257%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b257%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true', style='height: 225px; width: 100%; display: block;')
             .card-body
-              h4.card-title Vivianne McVue
               p.card-text
-                | Vivianne is a web developer and teacher who is passionate about building scalable, data-driven web apps, especially ones that address old problems with new tech!
-      h1.display-4.text-center.my-5.text-muted Upcoming festivals
-      ul#schedule.list-group
-        li.list-group-item
-          .d-flex.justify-content-between
-            h5 Beginning
-            h5 I&apos;m in the middle
-            span.badge.badge-pill.badge-info 10:00am
-          p And im speaking
-        li.list-group-item
-          .d-flex.justify-content-between
-            h5 Beginning
-            h5 I&apos;m in the middle
-            span.badge.badge-pill.badge-info 10:00am
-        li.list-group-item.list-group-item-success
-          .d-flex.justify-content-between
-            h5 Beginning
-            h5 I&apos;m in the middle
-            span.badge.badge-pill.badge-info 10:00am
+                | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+              .d-flex.justify-content-between.align-items-center
+                .btn-group
+                  a(href='/festivals')
+                    button.btn.btn-sm.btn-outline-secondary(type='button') See More
+                small.text-muted 9 mins
+        .col-md-4
+          .card.mb-4.shadow-sm
+            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b257%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b257%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true', style='height: 225px; width: 100%; display: block;')
+            .card-body
+              p.card-text
+                | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+              .d-flex.justify-content-between.align-items-center
+                .btn-group
+                  a(href='/festivals')
+                    button.btn.btn-sm.btn-outline-secondary(type='button') See More
+                small.text-muted 9 mins
+      //- .row
+      //-   .col-md-6.col-lg-4
+      //-     .card.mb-3
+      //-       img.card-img-top(src='./img/vivianne.png', alt='Vivianne')
+      //-       .card-body
+      //-         h4.card-title EXIT Festival
+      //-         p.card-text
+      //-           | Serbia's best hidden secret
+      //-   .col-md-6.col-lg-4
+      //-     .card.mb-3
+      //-       img.card-img-top(src='./img/robbie.png', alt='Robbie')
+      //-       .card-body
+      //-         h4.card-title Sonus Festival
+      //-         p.card-text
+      //-           | Summer vibes on the beautiful coast of Croatia
+      a(href='/festivals')
+        button.btn.btn-primary.btn-block(type='button') See all festivals
+      hr
       button.btn.btn-outline-info.btn-lg.d-block.mx-auto.my-5(type='button', data-toggle='modal', data-target='#register') Don&apos;t Miss Out, Register Now
-block modal
+
     #register.modal.fade(tabindex='-1', role='dialog', aria-labelledby='register form', aria-hidden='true')
       .modal-dialog(role='document')
         .modal-content
@@ -137,3 +149,5 @@ block modal
                     option(value='2017') 2017
               hr.my-4
               button.btn.btn-primary(type='submit') Submit
+
+              

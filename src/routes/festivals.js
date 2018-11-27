@@ -3,6 +3,10 @@ const router = express.Router();
 
 const Festival = require('../models').Festival;
 
+router.get('/', (req, res, next) => {
+    res.render('allFestivals')
+})
+
 router.post('/', (req, res, next) => {
     Festival.create(req.body, function(error, newFestival){
         if(error){
