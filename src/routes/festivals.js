@@ -7,6 +7,10 @@ router.get('/', (req, res, next) => {
     res.render('allFestivals')
 })
 
+router.get('/:pera', (req, res, next) => {
+    res.render('festivalDetails')
+})
+
 router.post('/', (req, res, next) => {
     Festival.create(req.body, function(error, newFestival){
         if(error){
