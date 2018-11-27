@@ -55,12 +55,13 @@ const Festival = mongoose.model('Festival', FestivalSchema);
 // const Ticket = mongoose.model('Ticket', TicketSchema);
 
 const UserSchema = new Schema({
-    name: {type: String, required: true},
-    surname: {type: String, required: true},
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
     username: {type: String, required: true, unique: true},
     emailAddress: {type: String, unique: true, required: true},
     password: {type: String, required: true},
-    favoriteActs: [{type: String}]
+    favoriteArtist: {type: String},
+    favoriteGenres: [{type: String}]
     // paymentInfo:{
     //     creditCardNum: {type: String},
     //     zipCode: {type: String},
