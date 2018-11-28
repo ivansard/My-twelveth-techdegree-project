@@ -36,23 +36,41 @@ router.get('/profile', (req, res, next) => {
 //POST /register
 //After registration, the form submits to this route
 router.post('/register', (req, res, next) => {
-    //VALIDATION OF THE DATA STILL NEEDED HERE!!
-    req.body.country = getCountryName(req.body.country);
-    //Create a new user in the db with the data
+    //Confirm that all mandatory fields are there
     console.log(req.body);
-    User.create(req.body, function(error, newUser){
-        if(error){
+    if(req.body.firstName && req.body.lastName
+       && req.body.emailAddress && req.body.username
+       && req.body.password && req.body.confirmPassword){
+
+        //Confirm that the user has typed the same password twice
+        if(req.body.password !== req.body.confirmPassword){
+            let error = new Error('Passwords do not match!')
+            error.status = 400;
             return next(error);
         }
-        if(!newUser){
-            let err = new Error('Issue creating user in db')
-            err.status = 400;
-            return next(err);
-        }
-        req.session.userId = newUser._id;
-        return res.redirect('/users/profile');
-    })
 
+        //If the user selected a country, convert its ISO code into its name
+        if(req.body.country){
+            req.body.country = getCountryName(req.body.country);
+        }
+        //Create a new user in the db with the data
+        User.create(req.body, function(error, newUser){
+            if(error){
+                return next(error);
+            }
+            if(!newUser){
+                let err = new Error('Issue creating user in db')
+                err.status = 400;
+                return next(err);
+            }
+            req.session.userId = newUser._id;
+            return res.redirect('/users/profile');
+        })
+       } else {
+           let error = new Error('Not all mandatory fields were submitted!')
+           error.status = 400;
+           return next(error);
+       }
 })
 
 router.post('/', (req, res, next) => {

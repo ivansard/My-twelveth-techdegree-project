@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
@@ -69,6 +70,50 @@ const UserSchema = new Schema({
     //     expirationDate: {type: Date}
     // },
     // purchasedTickets: [TicketSchema]
+})
+
+//Method for authenticating a user 
+UserSchema.statics.authenticate = function(email, password, callback){
+    //Find the document with the users email address
+    User.findOne({email: email})
+        .exec(function(error, user){
+            if(error){
+                return callback(error);
+            } else if(!user){
+                let errorNoUser = new Error('A user with the submitted email does not exist');
+                err.status = 401;
+                return callback(error);
+            }
+            //If we get to here, there is a user with the given email, so we will check his password
+            bcrypt.compare(password, user.password, function(error, result){
+                //Compare returns an error, or a boolean value
+                if(result === true){
+                    //In node, the structure of a callback is (error, result)
+                    //Here the error is set to null, because there are is no error
+                    return callback(null, user)
+                } else {
+                    return callback()
+                }
+            })
+        })
+}
+
+//Hash password before save into db
+UserSchema.pre('save', function(next){
+    //this == object we have created, and is about to be inserted into DB
+    const user = this;
+    //Hashing password
+    //First argument - the password the user gave
+    //Second argument - how many times to run the encryption algorithm
+    //Third - callback which is run after the password is hashed
+    bcrypt.hash(user.password, 10, function(error, hash){
+        if(error){
+            return next(error)
+        }
+        user.password = hash;
+        //Pozivamo sledecu funkciju u middleware stack-u, u ovom slucaju mongovu funkciju koja cuva user-a
+        next();
+    })
 })
 
 const User = mongoose.model('User', UserSchema);

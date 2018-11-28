@@ -21,17 +21,24 @@ db.once('open', () => {
   console.log('Db connection successful');
 })
 
+//Adding body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 //Adding sessions
 app.use(session({
     secret: 'Capstone project',
     resave: true,
     saveUninitialized: false
   }))
-  
 
-//Adding body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//Making the currently logged in user available to all our templates
+app.use( (req, res, next) => {
+  res.locals.currentUser = req.session.userId;
+  next();
+})
+
+
 
 //Importing and setting route handlers
 
@@ -53,13 +60,13 @@ app.get('/', (req, res, next) => {
     res.render('home');
 })
 
-// global error handler
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(err.status || 500).json({
-      message: err.message,
-      error: {}
-    });
+//Error handling widdleware
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
   
 //Setting up app on port 3000
