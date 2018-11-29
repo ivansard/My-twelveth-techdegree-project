@@ -70,7 +70,6 @@ router.get('/:festivalName', (req, res, next) => {
                     });
                     //Rendering the view with the photos
                     festival.photos = photos;
-                    console.log(festival.photos);
                     res.render('festivalDetails', {festival: festival});
                 })
                 .catch(function (error) {

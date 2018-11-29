@@ -10,41 +10,68 @@ block content
         h1.display-4.font-weight-bold #{festival.name}
         p.lead.font-weight-bold
             | #{festival.longDescription}
-    .container
-        .album.py-5.bg-light
+    #photos.container
+        .album.bg-light
+            h2.font-weight-bold.text-center.mb-4 See for yourself
             .row
                 each photo in festival.photos
                     .col-md-4
                         .card.mb-4.shadow-sm
                             img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Festival image', style='height: 225px; width: 100%; display: block;', src=`${photo.url}`, data-holder-rendered='true')
-        //- ul.nav.justify-content-center.mb-2
-        //-     li.nav-item
-        //-         a.nav-link.active(href='#') Photos
-        //-     li.nav-item
-        //-         a.nav-link(href='#') Weather
-        //-     li.nav-item
-        //-         a.nav-link(href='#') Discussion
-        //- hr
-        ul#schedule.list-group
-        li.list-group-item
-            .d-flex.justify-content-between
-                h5 USER WHO ASKED
-                a(href='/questions')
+        hr
+    #weather.container.my-4
+        h2.font-weight-bold.text-center.mb-4 Prepare yourself
+        h2.font-weight-bold.text-center.mb-4 Weather info should go here
+        hr
+
+    #questions.container.mb-4
+        h2.font-weight-bold.text-center.mb-4 Find out what you need
+        ul#schedule.list-group.mb-4
+            li.list-group-item
+                .d-flex.justify-content-between
+                    h5 USER WHO ASKED
+                    a(href='/questions')
+                        h5 QUESTION TEXT
+                    span.badge.badge-pill.badge-info NUMBER OF ANSWERS
+                p USER DETAILS
+            li.list-group-item
+                .d-flex.justify-content-between
+                    h5 USER WHO ASKED 
                     h5 QUESTION TEXT
-                span.badge.badge-pill.badge-info NUMBER OF ANSWERS
-            p USER DETAILS
-        li.list-group-item
-            .d-flex.justify-content-between
-                h5 USER WHO ASKED 
-                h5 QUESTION TEXT
-                span.badge.badge-pill.badge-info NUMBER OF ANSWERS
-            p USER DETAILS
-        li.list-group-item
-            .d-flex.justify-content-between
-                h5 USER WHO ASKED
-                h5 QUESTION TEXT
-                span.badge.badge-pill.badge-info NUMBER OF ANSWERS
-            p USER DETAILS
+                    span.badge.badge-pill.badge-info NUMBER OF ANSWERS
+                p USER DETAILS
+            li.list-group-item
+                .d-flex.justify-content-between
+                    h5 USER WHO ASKED
+                    h5 QUESTION TEXT
+                    span.badge.badge-pill.badge-info NUMBER OF ANSWERS
+                p USER DETAILS
+        if !currentUser
+            h3.text-center You can also ask anything you want to know, just sign up log in!
+            .row
+                .col-md-6
+                    a(href='/users/register')
+                        button.btn.btn-primary.btn-lg.btn-block(type='button') Sign Up
+                .col-md-6
+                    a(href='/users/login')
+                        button.btn.btn-primary.btn-lg.btn-block(type='button') Login
+        else
+            .row
+                .col-md-6.mx-auto
+                    button.btn.btn-primary.btn-lg.btn-block(type='button', data-toggle='modal', data-target='#exampleModal') Ask a question
         hr.my-5
+    #exampleModal.modal(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title QUESTION
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    p Modal body text goes here.
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save changes
+        
     
 
