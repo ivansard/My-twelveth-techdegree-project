@@ -35,6 +35,8 @@ const FestivalSchema = new Schema({
     longDescription: {type: String},
     music: [{type: String}],
     acts: [{type: String}],
+    thumbnailImage: {type: String},
+    jumbotronImage: {type: String},
     questions: [{type: Schema.Types.ObjectId, ref:'Question'}]
 })
 

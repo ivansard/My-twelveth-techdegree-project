@@ -1,10 +1,15 @@
 extends layout
 
+block additionalStyles
+
+    style(type="text/css")
+        | .jumbotron{ background-image: url('#{festival.jumbotronImage}'); background-size: cover; color:white; background-position: center 20%}
+
 block content
     .jumbotron.text-center.mt-5.bg-secondary
-        h1.display-4 EXIT Festival
-        p.lead
-            | LONG FESTIVAL DESCRIPTION GOES HERE
+        h1.display-4.font-weight-bold #{festival.name}
+        p.lead.font-weight-bold
+            | #{festival.longDescription}
     .container
         ul.nav.justify-content-center.mb-2
             li.nav-item
@@ -35,4 +40,5 @@ block content
                 span.badge.badge-pill.badge-info NUMBER OF ANSWERS
             p USER DETAILS
         hr.my-5
+    
 

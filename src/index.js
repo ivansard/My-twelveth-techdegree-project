@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+//Model imports
+
+const Festival = require('./models').Festival;
+
 
 
 
@@ -55,7 +59,16 @@ app.use('/static', express.static('public'))
 app.set('view engine', 'pug');
 
 app.get('/', (req, res, next) => {
-    res.render('home');
+  //Retrieving festivals from the db 
+  Festival.find({})
+          .exec( function(error, festivals){
+            if(error){
+              return next(error);
+            } else{
+              console.log(festivals);
+              res.render('home', {festivals: festivals});
+            }
+          })
 })
 
 //Error handling widdleware

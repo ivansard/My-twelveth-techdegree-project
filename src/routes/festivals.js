@@ -27,11 +27,30 @@ function setPhotoData(festivalName){
   }
 
 router.get('/', (req, res, next) => {
-    res.render('allFestivals')
+    Festival.find({})
+          .exec( function(error, festivals){
+            if(error){
+              return next(error);
+            } else{
+              console.log(festivals);
+              res.render('allFestivals', {festivals: festivals});
+            }
+          })
 })
 
-router.get('/:pera', (req, res, next) => {
-    res.render('festivalDetails')
+router.get('/:festivalName', (req, res, next) => {
+    console.log(req.params.festivalName);
+    Festival.findOne({name: req.params.festivalName})
+          .exec( function(error, festival){
+            if(error){
+              return next(error);
+            } else{
+              console.log(festival);
+              console.log(festival.longDescription);
+              console.log('Here');
+              res.render('festivalDetails', {festival: festival});
+            }
+          })
 })
 
 
@@ -44,6 +63,39 @@ router.post('/', (req, res, next) => {
         }
         return res.json(newFestival); 
     })
+})
+
+// PUT festivals/:festivalId
+// Updates the given course
+router.put('/:festivalId', (req, res, next) => {
+    const festivalId = req.params.festivalId;
+    console.log(festivalId);
+    //Based on the query parameters festivalId, retrieve the specific course
+    Festival.findById(festivalId)
+        .exec(function(error, festival){
+            //If the festival is null/undefined, the submitted id is wrong
+            if(!festival){
+                let err = new Error('Festival with submitted id does not exist in db')
+                err.status = 400;
+                return next(err);
+            }
+            //If there was an error, send it back to the user
+            if(error){
+                error.status = 404;
+                return next(error);
+            } else {
+                //After retrieving the festival, set its data to the request body
+                festival.set(req.body);
+                festival.save(function(error, updatedFestival){
+                    if(error){
+                            error.status = 400;
+                            return next(error);
+                    }
+                    //204 indicates that the request has succeeded, but that the client doesn't need to go away from its current page
+                    return res.json(updatedFestival)
+                })
+            }
+        })
 })
 
 
