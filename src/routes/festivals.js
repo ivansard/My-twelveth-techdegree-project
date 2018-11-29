@@ -1,25 +1,33 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 
+//Importing models
 const Festival = require('../models').Festival;
+
+//Importing API keys
+const flickrApiKey = require('../config/config.js');
 
 //Function which fetches data based on a search query
 //This will be used for the search path
-function setPhotoData(festivalName){
-    const url = `https://api.flickr.com/services/rest/?api_key=${apiKey}&method=flickr.photos.search&tags=${searchTag}&format=json&per_page=24&page=1&nojsoncallback=1`;
+function getPhotoData(festivalName){
+    //URL for the Flickr API
+    const url = `https://api.flickr.com/services/rest/?api_key=${flickrApiKey}&method=flickr.photos.search&tags=${festivalName}&format=json&per_page=15&page=1&nojsoncallback=1`;
 
+    //Using axios to get the data from flickr
     axios.get(url)
     .then(response => {
-      //Fetching the photo data
-      const photos = response.data.photos.photo;
-      //Setting the photos, current search tag and the loading indicator in the state
-      this.setState( prevState => {
-        return {
-          photos: photos,
-          currentSearchTag: searchTag,
-          loading: false
-        }
-      })
+        //Fetching the photo data
+        const photos = response.data.photos.photo;
+        //Mapping the retrieved photo data, to the respective urls of the photos
+        photos = photos.map(photo => {
+            return {
+            url: `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
+            id: photo.id
+            }
+        });
+        //Returning the photo data
+        return photos;
     })
     .catch(function (error) {
       console.log('Error fetching data from Flickr', error);
@@ -45,10 +53,29 @@ router.get('/:festivalName', (req, res, next) => {
             if(error){
               return next(error);
             } else{
-              console.log(festival);
-              console.log(festival.longDescription);
-              console.log('Here');
-              res.render('festivalDetails', {festival: festival});
+                //URL for the Flickr API, for searching for the festival photos
+                const url = `https://api.flickr.com/services/rest/?api_key=${flickrApiKey}&method=flickr.photos.search&tags=${festival.name}&format=json&per_page=15&page=1&nojsoncallback=1`;
+
+                //Using axios to get the data from flickr
+                axios.get(url)
+                .then(response => {
+                    //Fetching the photo data
+                    let photos = response.data.photos.photo;
+                    //Mapping the retrieved photo data, to the respective urls of the photos
+                    photos = photos.map(photo => {
+                        return {
+                        url: `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
+                        id: photo.id
+                        }
+                    });
+                    //Rendering the view with the photos
+                    festival.photos = photos;
+                    console.log(festival.photos);
+                    res.render('festivalDetails', {festival: festival});
+                })
+                .catch(function (error) {
+                    return next(error);
+                });
             }
           })
 })

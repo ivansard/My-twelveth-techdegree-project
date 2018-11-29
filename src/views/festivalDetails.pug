@@ -11,14 +11,20 @@ block content
         p.lead.font-weight-bold
             | #{festival.longDescription}
     .container
-        ul.nav.justify-content-center.mb-2
-            li.nav-item
-                a.nav-link.active(href='#') Photos
-            li.nav-item
-                a.nav-link(href='#') Weather
-            li.nav-item
-                a.nav-link(href='#') Discussion
-        hr
+        .album.py-5.bg-light
+            .row
+                each photo in festival.photos
+                    .col-md-4
+                        .card.mb-4.shadow-sm
+                            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Festival image', style='height: 225px; width: 100%; display: block;', src=`${photo.url}`, data-holder-rendered='true')
+        //- ul.nav.justify-content-center.mb-2
+        //-     li.nav-item
+        //-         a.nav-link.active(href='#') Photos
+        //-     li.nav-item
+        //-         a.nav-link(href='#') Weather
+        //-     li.nav-item
+        //-         a.nav-link(href='#') Discussion
+        //- hr
         ul#schedule.list-group
         li.list-group-item
             .d-flex.justify-content-between
