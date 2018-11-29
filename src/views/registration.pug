@@ -6,7 +6,7 @@ block content
         p.lead
             | Share the energy and help with others
     .container
-        form(method='POST' action='/users/register')
+        form.my-5(method='POST' action='/users/register')
             .form-row
                 .form-group.col-md-6
                     label(for='firstName') First Name
@@ -311,4 +311,4 @@ block content
             //-             .d-flex.justify-content-between.align-items-center
             //-                 small.text-muted 9 mins
 
-            button.btn.btn-primary(type='submit') Sign In
+            button.btn.btn-primary.btn-block(type='submit') Sign In

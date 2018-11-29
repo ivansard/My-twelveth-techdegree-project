@@ -1,0 +1,16 @@
+extends layout
+block content
+    .jumbotron.jumbotron-fluid.bg-info.text-white
+        .container.text-sm-center.pt-5
+            h1.display-3 Log-In
+            p.lead Join the rest of the party
+    .container.mt-5
+        form.my-5(method='POST' action='/users/login')
+                .form-row
+                    .form-group.col-md-6
+                        label(for='email') Email
+                        input#inputEmail4.form-control(type='email', placeholder='Email', name='emailAddress')
+                    .form-group.col-md-6
+                        label(for='password') Password
+                        input#inputAddress2.form-control(type='password', placeholder='Password', name='password')
+                button.btn.btn-primary.btn-block(type='submit') Log In

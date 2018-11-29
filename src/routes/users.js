@@ -1,36 +1,66 @@
 const express = require('express');
 const router = express.Router();
 
+//Models
 const User = require('../models').User;
 
+//Custom middleware
+const mid = require('../middleware/index');
+
+//Helper functions
 const getCountryName = require('../util').getCountryName;
 
 
+console.log(mid.loggedOut);
 
 
-router.get('/register', (req, res, next) => {
-    res.render('registration')
+router.get('/register', mid.loggedOut, (req, res, next) => {
+    return res.render('registration')
+})
+
+//GET /login
+//Renders the login page for a user who wishes to log in
+router.get('/login', mid.loggedOut, (req, res, next) => {
+    res.render('login');
+})
+
+
+//POST /login
+//Authenticates the users credentials, and if they are valid, renders the user's profile page
+router.post('/login', (req, res, next) => {
+    //Checking for the submitted credentials
+    if(req.body.emailAddress && req.body.password){
+        User.authenticate(req.body.emailAddress, req.body.password, function(error, user){
+            if(error){
+                return next(error);
+            } else if(!user){
+                let err = new Error('User could not be found');
+                err.status = 400;
+                return next(err);
+            } else {
+                req.session.userId = user._id;
+                return res.redirect('/users/profile')
+            }
+        })
+    } else {
+        let error = new Error('Email and password are required');
+        error.status = 401;
+        return next(error);
+    }
 })
 
 //GET /profile
 //Renders the profile for the currently logged in user
-router.get('/profile', (req, res, next) => {
-    //Checking if the user is logged in
-    if(!req.session.userId){
-        const error = new Error('You must be logged in to view this page');
-        error.status = 403;
-        return next(error);
-    } else {
-        //Retrieving the logged in user from the database, so that his profile page can be rendered
-        User.findById(req.session.userId)
-            .exec(function(error, user){
-                if(error){
-                    return next(error)
-                } else {
-                    res.render('profile', {user: user})
-                }
-            })
-    }
+router.get('/profile', mid.requiresLogin, (req, res, next) => {
+    //Retrieving the logged in user from the database, so that his profile page can be rendered
+    User.findById(req.session.userId)
+        .exec(function(error, user){
+            if(error){
+                return next(error)
+            } else {
+                res.render('profile', {user: user})
+            }
+        })
 })
 
 //POST /register
@@ -51,7 +81,9 @@ router.post('/register', (req, res, next) => {
 
         //If the user selected a country, convert its ISO code into its name
         if(req.body.country){
+            console.log(req.body.country);
             req.body.country = getCountryName(req.body.country);
+            console.log(req.body.country);
         }
         //Create a new user in the db with the data
         User.create(req.body, function(error, newUser){
@@ -73,15 +105,29 @@ router.post('/register', (req, res, next) => {
        }
 })
 
-router.post('/', (req, res, next) => {
-    User.create(req.body, function(error, newUser){
-        if(error){
-            error.status = 400;
+// GET .logout
+router.get('/logout', function(req, res, next){
+    if(req.session){
+      req.session.destroy( function(error){
+          if(error){
             return next(error);
-        }
-        return res.json(newUser); 
-    })
+          } else {
+            return res.redirect('/');
+          }
+      })
+    }
 })
+
+//
+// router.post('/', (req, res, next) => {
+//     User.create(req.body, function(error, newUser){
+//         if(error){
+//             error.status = 400;
+//             return next(error);
+//         }
+//         return res.json(newUser); 
+//     })
+// })
 
 
 

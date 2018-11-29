@@ -1,15 +1,16 @@
 extends layout.pug
+
 block content
-    .jumbotron.jumbotron-fluid.bg-info.text-white
-      .container.text-sm-center.pt-5
-        h1.display-3 Festival Helper
-        p.lead A guide to festival people, from festival people. Hope you enjoy
-        .btn-group.mt-4(role='group', aria-label='Callout buttons')
-          a(href='/users/register')
-            button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#register') Register now
-          a.btn.btn-light.btn-lg(href='#speakers') Festivals
-    #about.container.pt-4
-      .row
+  .jumbotron.jumbotron-fluid.bg-info.text-white
+    .container.text-sm-center.pt-5
+      h1.display-3 Festival Helper
+      p.lead A guide to festival people, from festival people. Hope you enjoy
+      .btn-group.mt-4(role='group', aria-label='Callout buttons')
+        a(href='/users/register')
+          button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#register') Register now
+        a.btn.btn-light.btn-lg(href='#speakers') Festivals
+  #about.container.pt-4
+    .row
         .col-lg.order-lg-2
           h3.mb-4 Why?
           p
@@ -24,115 +25,117 @@ block content
             | Here you can post questions about your favorite festivals, get help and help out other adventure seekers
           p
             | Apart from preparing for the next festival, you could find your adventure partners right here!
-      h1#speakers.display-4.text-center.my-5.text-muted Find your groove
-      p FESTIVAL CARDS SHOULD GO HERE
-      .album.py-5.bg-light
-      .row
-        .col-md-4
-          .card.mb-4.shadow-sm
-            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', style='height: 225px; width: 100%; display: block;', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b256%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b256%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true')
-            .card-body
-              p.card-text
-                | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-              .d-flex.justify-content-between.align-items-center
-                .btn-group
-                  a(href='/festivals')
-                    button.btn.btn-sm.btn-outline-secondary(type='button') See More
-                small.text-muted 9 mins
-        .col-md-4
-          .card.mb-4.shadow-sm
-            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b257%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b257%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true', style='height: 225px; width: 100%; display: block;')
-            .card-body
-              p.card-text
-                | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-              .d-flex.justify-content-between.align-items-center
-                .btn-group
-                  a(href='/festivals')
-                    button.btn.btn-sm.btn-outline-secondary(type='button') See More
-                small.text-muted 9 mins
-        .col-md-4
-          .card.mb-4.shadow-sm
-            img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b257%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b257%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true', style='height: 225px; width: 100%; display: block;')
-            .card-body
-              p.card-text
-                | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-              .d-flex.justify-content-between.align-items-center
-                .btn-group
-                  a(href='/festivals')
-                    button.btn.btn-sm.btn-outline-secondary(type='button') See More
-                small.text-muted 9 mins
-      a(href='/festivals')
-        button.btn.btn-primary.btn-block(type='button') See all festivals
-      hr
-      button.btn.btn-outline-info.btn-lg.d-block.mx-auto.my-5(type='button', data-toggle='modal', data-target='#register') Don&apos;t Miss Out, Register Now
+    h1#speakers.display-4.text-center.my-5.text-muted Find your groove
+    p FESTIVAL CARDS SHOULD GO HERE
+    .album.py-5.bg-light
+    .row
+      .col-md-4
+        .card.mb-4.shadow-sm
+          img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', style='height: 225px; width: 100%; display: block;', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b256%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b256%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true')
+          .card-body
+            p.card-text
+              | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .d-flex.justify-content-between.align-items-center
+              .btn-group
+                a(href='/festivals')
+                  button.btn.btn-sm.btn-outline-secondary(type='button') See More
+              small.text-muted 9 mins
+      .col-md-4
+        .card.mb-4.shadow-sm
+          img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b257%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b257%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true', style='height: 225px; width: 100%; display: block;')
+          .card-body
+            p.card-text
+              | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .d-flex.justify-content-between.align-items-center
+              .btn-group
+                a(href='/festivals')
+                  button.btn.btn-sm.btn-outline-secondary(type='button') See More
+              small.text-muted 9 mins
+      .col-md-4
+        .card.mb-4.shadow-sm
+          img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Thumbnail [100%x225]', src='data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22208%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20208%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16754d7b257%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A11pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16754d7b257%22%3E%3Crect%20width%3D%22208%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2266.953125%22%20y%3D%22117.3%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E', data-holder-rendered='true', style='height: 225px; width: 100%; display: block;')
+          .card-body
+            p.card-text
+              | This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            .d-flex.justify-content-between.align-items-center
+              .btn-group
+                a(href='/festivals')
+                  button.btn.btn-sm.btn-outline-secondary(type='button') See More
+              small.text-muted 9 mins
+    a(href='/festivals')
+      button.btn.btn-primary.btn-block(type='button') See all festivals
+    hr
+    button.btn.btn-outline-info.btn-lg.d-block.mx-auto.my-5(type='button', data-toggle='modal', data-target='#register') Don&apos;t Miss Out, Register Now
 
-    #register.modal.fade(tabindex='-1', role='dialog', aria-labelledby='register form', aria-hidden='true')
-      .modal-dialog(role='document')
-        .modal-content
-          .modal-header.bg-info.text-white
-            h5#exampleModalLongTitle.modal-title Register for Conf
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') &times;
-          .modal-body
-            form
-              .alert.alert-warning.alert-dismissible.fade.show(role='alert')
-                strong Hurry!
-                |  Discount period lasts only two more days!
-                button.close(type='button', data-dismiss='alert', aria-label='Close')
-                  span(aria-hidden='true') &times;
-              h5.mb-5 Basic info
-              .form-group
-                label(for='name') Name:
-                input#name.form-control(type='text')
-              .form-group
-                label(for='email') Email:
-                input#email.form-control(type='email')
-              .form-group
-                label(for='role') Role:
-                select#role.form-control
-                  option(value='1') Role 1
-                  option(value='2') Role 2
-                  option(value='3') Role 3
-              hr.my-4
-              h5.mb-5 Which topics interest you the most
-              .form-check
-                label.form-check-label
-                  input.custom-control-input(type='checkbox')
-                  span.custom-control-indicator
-                  span.custom-control-description Node
-              .form-check
-                label.form-check-label
-                  input.custom-control-input(type='checkbox')
-                  span.custom-control-indicator
-                  span.custom-control-description Angular
-              .form-check
-                label.form-check-label
-                  input.custom-control-input(type='checkbox')
-                  span.custom-control-indicator
-                  span.custom-control-description React
-              hr.my-4
-              h5.mb-4 Payment info
-              .form-row
-                .col-lg-6.form-group
-                  label(for='cc-num') Card Number:
-                  input#cc-num.form-control(type='text')
-                .col-lg.form-group
-                  label(for='zip') Zip Code:
-                  input#zip.form-control(type='text')
-                .col-lg.form-group
-                  label(for='cvv') CVV:
-                  input#cvv.form-control(type='text')
-              .form-row
-                label.col-lg-12 Expiration date:
-                .form-group.col-lg-8
-                  select#exp-month.custom-select.form-control
-                    option(value='1') 1 - January
-                    option(value='2') 2 - February
-                .form-group.col-lg-4
-                  select#exp-year.custom-select.form-control
-                    option(value='2016') 2016
-                    option(value='2017') 2017
-              hr.my-4
-              button.btn.btn-primary(type='submit') Submit
+  #register.modal.fade(tabindex='-1', role='dialog', aria-labelledby='register form', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header.bg-info.text-white
+          h5#exampleModalLongTitle.modal-title Register for Conf
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          form
+            .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+              strong Hurry!
+              |  Discount period lasts only two more days!
+              button.close(type='button', data-dismiss='alert', aria-label='Close')
+                span(aria-hidden='true') &times;
+            h5.mb-5 Basic info
+            .form-group
+              label(for='name') Name:
+              input#name.form-control(type='text')
+            .form-group
+              label(for='email') Email:
+              input#email.form-control(type='email')
+            .form-group
+              label(for='role') Role:
+              select#role.form-control
+                option(value='1') Role 1
+                option(value='2') Role 2
+                option(value='3') Role 3
+            hr.my-4
+            h5.mb-5 Which topics interest you the most
+            .form-check
+              label.form-check-label
+                input.custom-control-input(type='checkbox')
+                span.custom-control-indicator
+                span.custom-control-description Node
+            .form-check
+              label.form-check-label
+                input.custom-control-input(type='checkbox')
+                span.custom-control-indicator
+                span.custom-control-description Angular
+            .form-check
+              label.form-check-label
+                input.custom-control-input(type='checkbox')
+                span.custom-control-indicator
+                span.custom-control-description React
+            hr.my-4
+            h5.mb-4 Payment info
+            .form-row
+              .col-lg-6.form-group
+                label(for='cc-num') Card Number:
+                input#cc-num.form-control(type='text')
+              .col-lg.form-group
+                label(for='zip') Zip Code:
+                input#zip.form-control(type='text')
+              .col-lg.form-group
+                label(for='cvv') CVV:
+                input#cvv.form-control(type='text')
+            .form-row
+              label.col-lg-12 Expiration date:
+              .form-group.col-lg-8
+                select#exp-month.custom-select.form-control
+                  option(value='1') 1 - January
+                  option(value='2') 2 - February
+              .form-group.col-lg-4
+                select#exp-year.custom-select.form-control
+                  option(value='2016') 2016
+                  option(value='2017') 2017
+            hr.my-4
+            button.btn.btn-primary(type='submit') Submit
+
+  include includes/footer.pug
 
               

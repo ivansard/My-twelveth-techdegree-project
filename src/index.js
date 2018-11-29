@@ -38,8 +38,6 @@ app.use( (req, res, next) => {
   next();
 })
 
-
-
 //Importing and setting route handlers
 
 const festivals = require('./routes/festivals');

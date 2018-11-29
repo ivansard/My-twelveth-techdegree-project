@@ -1,6 +1,9 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
       .container
-        a.navbar-brand.order-1(href='/users//register') LOG IN
+        if !currentUser
+          a.navbar-brand.order-1(href='/users/login') LOG IN
+        else
+          a.navbar-brand.order-1(href='/users/logout') LOG OUT
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
           span.navbar-toggler-icon
         #navbarNavAltMarkup.collapse.navbar-collapse
@@ -10,4 +13,5 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
               span.sr-only (current)
             a.nav-item.nav-link(href='/about') About
             a.nav-item.nav-link(href='/festivals') Festivals
-            a.nav-item.nav-link(href='/users//register') Sign-up
+            if !currentUser
+              a.nav-item.nav-link(href='/users//register') Sign-up

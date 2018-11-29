@@ -28,16 +28,11 @@ const Question = mongoose.model('Question', QuestionSchema);
 //Festival schema and model
 
 const FestivalSchema = new Schema({
-    name: {type: String},
+    name: {type: String, unique: true},
     location: {type: String},
     country: {type: String},
-    description: {type: String},
-    // startDate: {type: Date},
-    // endDate: {type: Date},
-    // totalTicketsRegular: {type: Number},
-    // totalTicketsVip: {type: Number},
-    // soldTicketsRegular: {type: Number, default: 0},
-    // soldTicketsVip: {type: Number, default: 0},
+    shortDescription: {type: String},
+    longDescription: {type: String},
     music: [{type: String}],
     acts: [{type: String}],
     questions: [{type: Schema.Types.ObjectId, ref:'Question'}]
@@ -75,14 +70,14 @@ const UserSchema = new Schema({
 //Method for authenticating a user 
 UserSchema.statics.authenticate = function(email, password, callback){
     //Find the document with the users email address
-    User.findOne({email: email})
+    User.findOne({emailAddress: email})
         .exec(function(error, user){
             if(error){
                 return callback(error);
             } else if(!user){
                 let errorNoUser = new Error('A user with the submitted email does not exist');
-                err.status = 401;
-                return callback(error);
+                errorNoUser.status = 401;
+                return callback(errorNoUser);
             }
             //If we get to here, there is a user with the given email, so we will check his password
             bcrypt.compare(password, user.password, function(error, result){
@@ -90,8 +85,10 @@ UserSchema.statics.authenticate = function(email, password, callback){
                 if(result === true){
                     //In node, the structure of a callback is (error, result)
                     //Here the error is set to null, because there are is no error
+                    console.log('No error with password validation');
                     return callback(null, user)
                 } else {
+                    console.log('Error with password validation');
                     return callback()
                 }
             })

@@ -1,7 +1,15 @@
 extends layout
 
 block content
-    .container.mt-5
+    .jumbotron.jumbotron-fluid.bg-info.text-white
+        .container.text-sm-center.pt-5
+            h1.display-3 #{user.firstName} #{user.lastName}
+            p.lead Welcome to your profile page
+    .main.container.clearfix
         .row
-            .col
-                p This should be the users profile #{user.name} #{user.surname}
+            .col-md-8.col-md-offset-2
+                //- h1.display-4
+                //-     img.avatar.img-circle.hidden-xs-down(src='/static/images/avatar.png', alt='avatar')
+                //-     | #{user.firstName} #{user.lastName}
+                h2.favorite-artist Favorite Artist
+                | #{user.favoriteArtist}
