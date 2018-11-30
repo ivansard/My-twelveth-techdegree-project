@@ -27,25 +27,16 @@ block content
     #questions.container.mb-4
         h2.font-weight-bold.text-center.mb-4 Find out what you need
         ul#schedule.list-group.mb-4
-            li.list-group-item
-                .d-flex.justify-content-between
-                    h5 USER WHO ASKED
-                    a(href='/questions')
-                        h5 QUESTION TEXT
-                    span.badge.badge-pill.badge-info NUMBER OF ANSWERS
-                p USER DETAILS
-            li.list-group-item
-                .d-flex.justify-content-between
-                    h5 USER WHO ASKED 
-                    h5 QUESTION TEXT
-                    span.badge.badge-pill.badge-info NUMBER OF ANSWERS
-                p USER DETAILS
-            li.list-group-item
-                .d-flex.justify-content-between
-                    h5 USER WHO ASKED
-                    h5 QUESTION TEXT
-                    span.badge.badge-pill.badge-info NUMBER OF ANSWERS
-                p USER DETAILS
+            each question in festival.questions
+                li.list-group-item
+                    .d-flex.justify-content-between
+                        h5 #{question.user.firstName} #{question.user.lastName}
+                        a(href=`/questions/${question._id}`)
+                            h5 #{question.questionText}
+                        span.badge.badge-pill.badge-info.font-weight-bold #{question.answers.length}
+                            |
+                            | Answers
+                    p #{question.user.username}
         if !currentUser
             h3.text-center You can also ask anything you want to know, just sign up log in!
             .row
@@ -68,10 +59,22 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    p Modal body text goes here.
-                .modal-footer
-                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Save changes
-        
+                    form(action=`/festivals/${festival.name}`, method='POST')
+                        .form-group
+                            label(for='questionText') Ask a question:
+                            input#name.form-control(type='text', placeholder='Title of your question', name='questionText')  
+                        .form-group
+                            label(for='description') Questions details:
+                            textarea#name.form-control(type='text', name='description')  
+                        .form-group
+                            label(for='topic') Topic:
+                            select#role.form-control(name='topic')
+                                option(value='Accomodation') Accomodation
+                                option(value='Tickets') Tickets
+                                option(value='Vibe') Vibe
+                                option(value='Vibe') Other
+                        hr
+                        button.btn.btn-primary.btn-block(type='submit') Submit question
+                
     
 

@@ -4,58 +4,35 @@ const axios = require('axios');
 
 //Importing models
 const Festival = require('../models').Festival;
+const Question = require('../models').Question;
+const User = require('../models').User;
 
 //Importing API keys
 const flickrApiKey = require('../config/config.js');
 
-//Function which fetches data based on a search query
-//This will be used for the search path
-function getPhotoData(festivalName){
-    //URL for the Flickr API
-    const url = `https://api.flickr.com/services/rest/?api_key=${flickrApiKey}&method=flickr.photos.search&tags=${festivalName}&format=json&per_page=15&page=1&nojsoncallback=1`;
-
-    //Using axios to get the data from flickr
-    axios.get(url)
-    .then(response => {
-        //Fetching the photo data
-        const photos = response.data.photos.photo;
-        //Mapping the retrieved photo data, to the respective urls of the photos
-        photos = photos.map(photo => {
-            return {
-            url: `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
-            id: photo.id
-            }
-        });
-        //Returning the photo data
-        return photos;
-    })
-    .catch(function (error) {
-      console.log('Error fetching data from Flickr', error);
-    });
-  }
-
+// GET /festivals
 router.get('/', (req, res, next) => {
     Festival.find({})
           .exec( function(error, festivals){
             if(error){
               return next(error);
             } else{
-              console.log(festivals);
               res.render('allFestivals', {festivals: festivals});
             }
           })
 })
 
+//GET /festivals/:festivalName
+//Renders the page with details about a specific festival
 router.get('/:festivalName', (req, res, next) => {
-    console.log(req.params.festivalName);
+
     Festival.findOne({name: req.params.festivalName})
-          .exec( function(error, festival){
+            .exec( function(error, festival){
             if(error){
-              return next(error);
+                return next(error);
             } else{
                 //URL for the Flickr API, for searching for the festival photos
                 const url = `https://api.flickr.com/services/rest/?api_key=${flickrApiKey}&method=flickr.photos.search&tags=${festival.name}&format=json&per_page=15&page=1&nojsoncallback=1`;
-
                 //Using axios to get the data from flickr
                 axios.get(url)
                 .then(response => {
@@ -68,7 +45,7 @@ router.get('/:festivalName', (req, res, next) => {
                         id: photo.id
                         }
                     });
-                    //Rendering the view with the photos
+                    // Assigning the photos to the festival
                     festival.photos = photos;
                     res.render('festivalDetails', {festival: festival});
                 })
@@ -76,11 +53,61 @@ router.get('/:festivalName', (req, res, next) => {
                     return next(error);
                 });
             }
-          })
+            })
+
+            
+})
+
+//POST /festivals/:festivalName
+router.post('/:festivalName', (req, res, next) => {
+    //Check if everything was submitted on the form
+    if(req.body.questionText && req.body.description && req.body.topic){
+        //Finding the user in the db based on the session's user ID
+        User.findById(req.session.userId)
+            .exec( function(error, user){
+                req.body.user = user;
+                Question.create(req.body, function(error, newQuestion){
+                    if(error){
+                        return next(error);
+                    }
+                    if(!newQuestion){
+                        let err = new Error('Issue creating question in db')
+                        err.status = 400;
+                        return next(err);
+                    }
+                    //Find the festival for which the question was asked
+                    Festival.findOne({name: req.params.festivalName}, function(error, festival){
+                        if(error){
+                            return next(error);
+                        } else if(!festival){
+                            let err = new Error('Cannot find festival in database')
+                            err.status = 400;
+                            return next(err);
+                        }
+                        //Add the question's id to the array on the festival
+                        festival.questions.push(newQuestion);
+                        //Update the festival in the database
+                        festival.set({questions: festival.questions});
+                        festival.save(function(error, updatedFestival){
+                            if(error){
+                                    error.status = 400;
+                                    return next(error);
+                            }
+                            //Render the festival details page again
+                            res.redirect(`/festivals/${festival.name}`)
+                        })
+                    })
+                })
+            })
+    } else {
+        let error = new Error('Please fulfill all information about your question');
+        error.status = 401;
+        return next(error);
+    }
 })
 
 
-
+//Route for creating a new festival - USED ONLY WITH POSTMAN
 router.post('/', (req, res, next) => {
     Festival.create(req.body, function(error, newFestival){
         if(error){

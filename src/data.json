@@ -1,0 +1,96 @@
+{
+    "festivals": [
+        {
+            "name" : "Burning Man",
+            "music" : [
+                "Techno",
+                "House"
+            ],
+            "acts" : [
+                    "Lee Burridge",
+                    "Maceo Plex",
+                    "Jamie Jones",
+                    "Tale Of Us"
+            ],
+            "questions" : [],
+            "location" : "Reno",
+            "country" : "USA",
+            "shortDescription" : "Burning Man is routinely described as transformative. At the personal level, a transformative experience. At the group level, a transformative event or culture.",
+            "longDescription" : "Once a year, tens of thousands of people gather in Nevada’s Black Rock Desert to create Black Rock City, a temporary metropolis dedicated to community, art, self-expression, and self-reliance. In this crucible of creativity, all are welcome.",
+            "__v" : 1,
+            "jumbotronImage" : "http://static-21.sinclairstoryline.com/resources/media/d092e2dd-af00-4361-8632-5c67138e6f6b-large16x9_AP17246762451077.jpg",
+            "thumbnailImage" : "https://www.nationalgeographic.com/content/dam/travel/2017-digital/burning-man/hog-sculpture-burning-man-black-rock-desert-nevada.ngsversion.1501689659065.adapt.1900.1.jpg",
+            "eurTicketPrice": 200
+        },
+        {
+            "name" : "Sonus Festival",
+            "music" : [
+                "Techno",
+                "House"
+            ],
+            "acts" : [
+                    "Solomun",
+                    "Ritchie Hawtin",
+                    "Jamie Jones",
+                    "Carl Cox"
+            ],
+            "questions" : [],
+            "location" : "Split",
+            "country" : "Croatia",
+            "shortDescription" : "Five days and five nights - three clubs, beach parties, boat parties and much more!",
+            "longDescription" : "Sonus Festival is a 5-day techno party at Zrce Beach, Novalja, in Croatia. The creators of Time Warp are at the helm for 5 days of techno and house music royalty. Zrce's Aquarius, Kalypso and Papaya clubs host day and night stages, while boat parties take things out over the stunning Adriatic Sea. Each day's lineup features more world stars and pioneers than you'd find on most full festival programmes across Europe, and the sun-soaked setting only adds to the electric escapism.",
+            "__v" : 1,
+            "jumbotronImage" : "http://croatia.hr/sites/default/files/styles/image_full_width/public/2018-03/Sonus_Festival_Felix-Hohagen-Photography-1958.jpeg?itok=bEsS2HwM",
+            "thumbnailImage" : "https://www.total-croatia-news.com/media/k2/items/cache/34e5cb469a77b7c52e6b154890217bb8_XL.jpg",
+            "eurTicketPrice": 150
+        },
+        {
+            "name" : "Tomorrowland",
+            "music" : [
+                "Techno",
+                "House",
+                "EDM"
+            ],
+            "acts" : [
+                    "Lee Burridge",
+                    "Maceo Plex",
+                    "Jamie Jones",
+                    "Tale Of Us"
+            ],
+            "questions" : [],
+            "location" : "Boom",
+            "country" : "Belgium",
+            "shortDescription" : "Tomorrowland was first held in 2005 and has since become one of the world's largest and most notable music festivals. It now stretches over 2 weekends and usually sells out in minutes.",
+            "longDescription" : "We are...The People of Tomorrow. We believe in enjoying life to the fullest without having to compromise everything. We are responsible for the generation of tomorrow and respect each other and Mother Nature.",
+            "__v" : 1,
+            "jumbotronImage" : "https://www.tomorrowland.com/src/Frontend/Themes/tomorrowland/Core/Layout/images/timeline/2015-1.jpg",
+            "thumbnailImage" : "https://www.tomorrowland.com/src/Frontend/Themes/tomorrowland/Core/Layout/images/timeline/2018-1.jpg",
+            "eurTicketPrice": 350
+        },
+        {
+            "name" : "EXIT Festival",
+            "music" : [
+                "Techno",
+                "House",
+                "Rock",
+                "Reggae",
+                "Rap"
+            ],
+            "acts" : [
+                    "Robert Plant",
+                    "Wu Tang Clan",
+                    "Carl Cox",
+                    "The Prodigy"
+            ],
+            "questions" : [],
+            "location" : "Novi Sad",
+            "country" : "Serbia",
+            "shortDescription" : "A student political revlot, which has turned into the Best Major European Festival for 5 years running",
+            "longDescription" : "Exit festival is so much more than just a summer music festival. It’s more than the line-up and the stages. Exit is made up of its people – the festival was founded in 2000 as a student movement, so as to fight for freedom and democracy in Serbia. It was the first place youth gathered at from all former Yugoslav republics after a decade of civil wars. Now, its uniqueness lies in its mind-blowing location, the amazing Petrovaradin Fortress, artistic diversity, and local flavour.",
+            "__v" : 1,
+            "jumbotronImage" : "https://blog.cityexpert.rs/sites/default/files/slika/exit-festival-2018.jpg",
+            "thumbnailImage" : "https://www.residentadvisor.net/images/reviews/2018/ef-sunrise.jpeg",
+            "eurTicketPrice": 70
+        }
+    ]
+}

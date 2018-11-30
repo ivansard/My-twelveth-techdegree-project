@@ -7,9 +7,6 @@ const session = require('express-session');
 
 const Festival = require('./models').Festival;
 
-
-
-
 //Application instantiation 
 const app = express();
 
@@ -24,6 +21,9 @@ db.on('error', error => {
 db.once('open', () => {
   console.log('Db connection successful');
 })
+
+//Setting up promises in mongoose
+mongoose.Promise = global.Promise;
 
 //Adding body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,7 +65,6 @@ app.get('/', (req, res, next) => {
             if(error){
               return next(error);
             } else{
-              console.log(festivals);
               res.render('home', {festivals: festivals});
             }
           })
