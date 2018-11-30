@@ -3,6 +3,18 @@ const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
+//Method for sorting answers based on their number of votes first,
+//and secondly based on their creation date 
+const sortAnswers = function(ans1, ans2){
+    // - negative : ans1 goes before ans2
+    // 0 : no change
+    // + positive: ans2 goes before ans1
+    if(ans1.votes === ans2.votes){
+        return ans2.createdAt - ans1.createdAt
+    }
+    return ans2.votes - ans1.votes
+}
+
 const UserSchema = new Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
@@ -65,6 +77,7 @@ const User = mongoose.model('User', UserSchema);
 
 const AnswerSchema = new Schema({
     answerText: String,
+    user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
     votes: {type: Number, default: 0}
@@ -80,7 +93,13 @@ const QuestionSchema = new Schema({
     topic: String,
     createdAt: {type: Date, default: Date.now},
     user: {type: UserSchema},
+    festival: {type: Schema.Types.ObjectId, ref: 'Festival'},
     answers: [AnswerSchema]
+})
+
+QuestionSchema.pre('save', function(next){
+    this.answers.sort(sortAnswers);
+    next();
 })
 
 //OVO JE ON DELETE CASCADE - POGLEDAJ JOS KAKO TREBA DA SE ODRADI, JEBE STO JE NIZ
@@ -104,7 +123,7 @@ const FestivalSchema = new Schema({
     thumbnailImage: {type: String},
     jumbotronImage: {type: String},
     eurTicketPrice: {type: Number},
-    questions: [{type: QuestionSchema}]
+    // questions: [{type: QuestionSchema}]
 })
 
 const Festival = mongoose.model('Festival', FestivalSchema);

@@ -24,13 +24,21 @@ block content
             h2.text-center Answers
             each answer in question.answers
                 .row
-                    .col-md-10
                     .col-md-2
-                        p The plus and minus count should go here
                     .col-md-3
-                        p Answer image, name and details go here
-                    .col-md-9
-                        p This should be the body of the answer
+                        a(href=`/festivals/${festival.name}/questions/${question._id}/answers/${answer._id}/vote-up`)
+                            button.btn.btn-primary.btn-lg.btn-block(type='submit') Vote up
+                    .col-md-2.text-center
+                        p #{answer.votes}
+                    .col-md-3
+                        a(href=`/festivals/${festival.name}/questions/${question._id}/answers/${answer._id}/vote-down`)
+                                button.btn.btn-primary.btn-lg.btn-block(type='submit') Vote down
+                    .col-md-2
+                .row.mt-3
+                    .col-md-4
+                        p #{answer.user.firstName} #{answer.user.lastName}
+                    .col-md-8
+                        p #{answer.answerText}
                 hr
         .row
             .col-md-6.mx-auto.mt-4
@@ -44,7 +52,7 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body
-                    form(action=`/questions/${question._id}/answers`, method='POST')
+                    form(action=`/festivals/${festival.name}/questions/${question._id}/answers`, method='POST')
                         .form-group
                             label(for='answerText') Answer details:
                             textarea#name.form-control(type='text', name='answerText')  

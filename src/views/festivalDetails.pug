@@ -27,11 +27,11 @@ block content
     #questions.container.mb-4
         h2.font-weight-bold.text-center.mb-4 Find out what you need
         ul#schedule.list-group.mb-4
-            each question in festival.questions
+            each question in questions
                 li.list-group-item
                     .d-flex.justify-content-between
                         h5 #{question.user.firstName} #{question.user.lastName}
-                        a(href=`/questions/${question._id}`)
+                        a(href=`${festival.name}/questions/${question._id}`)
                             h5 #{question.questionText}
                         span.badge.badge-pill.badge-info.font-weight-bold #{question.answers.length}
                             |
