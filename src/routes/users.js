@@ -3,16 +3,13 @@ const router = express.Router();
 
 //Models
 const User = require('../models').User;
+const Festival = require('../models').Festival;
 
 //Custom middleware
 const mid = require('../middleware/index');
 
 //Helper functions
 const getCountryName = require('../util').getCountryName;
-
-
-console.log(mid.loggedOut);
-
 
 router.get('/register', mid.loggedOut, (req, res, next) => {
     return res.render('registration')
@@ -58,7 +55,21 @@ router.get('/profile', mid.requiresLogin, (req, res, next) => {
             if(error){
                 return next(error)
             } else {
-                res.render('profile', {user: user})
+                Festival.find({music: {"$in": user.favoriteGenres}})
+                        .exec(function(error, genreFestivals){
+                            if(error){
+                                return next(error);
+                            }
+                            Festival.find({acts: user.favoriteArtist})
+                                    .exec(function(error, artistFestivals){
+                                        if(error){
+                                            return next(error);
+                                        }
+                                        res.render('profile', {user: user,
+                                                               genreFestivals:genreFestivals,
+                                                               artistFestivals: artistFestivals})
+                                    })
+                        })
             }
         })
 })
@@ -67,37 +78,53 @@ router.get('/profile', mid.requiresLogin, (req, res, next) => {
 //After registration, the form submits to this route
 router.post('/register', (req, res, next) => {
     //Confirm that all mandatory fields are there
-    console.log(req.body);
     if(req.body.firstName && req.body.lastName
        && req.body.emailAddress && req.body.username
        && req.body.password && req.body.confirmPassword){
 
-        //Confirm that the user has typed the same password twice
-        if(req.body.password !== req.body.confirmPassword){
-            let error = new Error('Passwords do not match!')
-            error.status = 400;
-            return next(error);
-        }
+        User.find({})
+            .select({"username": 1, "emailAddress": 1})
+            .exec(function(error, data){
+                if(error){
+                    return next(error);
+                }
+                //Checking for same email or username
+                data.forEach(element => {
+                    if(element.emailAddress === req.body.emailAddress){
+                        error = new Error('Email already in use on this site')
+                        return next(error);
+                    }
+                    if(element.username === req.body.username){
+                        error = new Error('Username already in use on this site')
+                        return next(error);
+                    }
+                });
 
-        //If the user selected a country, convert its ISO code into its name
-        if(req.body.country){
-            console.log(req.body.country);
-            req.body.country = getCountryName(req.body.country);
-            console.log(req.body.country);
-        }
-        //Create a new user in the db with the data
-        User.create(req.body, function(error, newUser){
-            if(error){
-                return next(error);
-            }
-            if(!newUser){
-                let err = new Error('Issue creating user in db')
-                err.status = 400;
-                return next(err);
-            }
-            req.session.userId = newUser._id;
-            return res.redirect('/users/profile');
-        })
+                 //Confirm that the user has typed the same password twice
+                 if(req.body.password !== req.body.confirmPassword){
+                    let error = new Error('Passwords do not match!')
+                    error.status = 400;
+                    return next(error);
+                }
+
+                //If the user selected a country, convert its ISO code into its name
+                if(req.body.country){
+                    req.body.country = getCountryName(req.body.country);
+                }
+                //Create a new user in the db with the data
+                User.create(req.body, function(error, newUser){
+                    if(error){
+                        return next(error);
+                    }
+                    if(!newUser){
+                        let err = new Error('Issue creating user in db')
+                        err.status = 400;
+                        return next(err);
+                    }
+                    req.session.userId = newUser._id;
+                    return res.redirect('/users/profile');
+                })
+            })
        } else {
            let error = new Error('Not all mandatory fields were submitted!')
            error.status = 400;
@@ -117,18 +144,5 @@ router.get('/logout', function(req, res, next){
       })
     }
 })
-
-//
-// router.post('/', (req, res, next) => {
-//     User.create(req.body, function(error, newUser){
-//         if(error){
-//             error.status = 400;
-//             return next(error);
-//         }
-//         return res.json(newUser); 
-//     })
-// })
-
-
 
 module.exports = router;

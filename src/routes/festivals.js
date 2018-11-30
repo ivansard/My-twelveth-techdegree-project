@@ -12,6 +12,9 @@ const Answer = require('../models').Answer
 const flickrApiKey = require('../config/config.js').flickrApiKey;
 const fixerApiKey = require('../config/config.js').fixerApiKey;
 
+//Helper functions
+const formatDate = require('../util').formatDate
+
 //Setting the currently selected question in the request object
 router.param("qID", function(req, res, next, qID){
     Question.findById(req.params.qID, function(error, document){
@@ -66,6 +69,24 @@ router.get('/', (req, res, next) => {
               res.render('allFestivals', {festivals: festivals});
             }
           })
+})
+
+// GET /festivals/search
+// Retrieves festivals that match the specified search query
+router.get('/search', (req, res, next) => {
+    const searchQuery = req.query.searchQuery;
+    //Finding the festivals whose name matches the search query
+    Festival.find({
+        name: {"$regex": searchQuery}
+    })
+    .exec( function(error, festivals){
+        if(error){
+            return next(error);
+        }
+        //Render the search page again, but this time only with the
+        //festivals which were returned in the search
+        return res.render('allFestivals', {festivals: festivals})
+    })
 })
 
 //GET /festivals/:festivalName
@@ -165,8 +186,7 @@ router.get('/:festivalName/questions/:qID', (req, res, next) => {
                     err.status = 400;
                     return next(err);
                 }
-                console.log('Hopefully question with answers and users', question);
-                res.render('question', {question: question, festival: req.festival});
+                res.render('question', {question: question, festival: req.festival, formatDate: formatDate});
             })
 })
 
@@ -208,6 +228,11 @@ router.get('/:festivalName/questions/:qID/answers/:aID/vote-:dir', (req, res, ne
         const vote = req.params.dir;
         const question = req.question;
         const answer = req.answer;
+        //A user cannot answer his own question
+        if(answer.user.equals(req.session.userId)){
+            let error = new Error('You can not vote your own question');
+            return next(error);
+        }
         //Finding the answer in the questions array
         question.answers.forEach(questionAnswer => {
             if(answer._id.equals(questionAnswer._id)){

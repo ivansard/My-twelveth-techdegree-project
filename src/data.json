@@ -91,6 +91,25 @@
             "jumbotronImage" : "https://blog.cityexpert.rs/sites/default/files/slika/exit-festival-2018.jpg",
             "thumbnailImage" : "https://www.residentadvisor.net/images/reviews/2018/ef-sunrise.jpeg",
             "eurTicketPrice": 70
+        },
+        {
+            "name" : "Nišville",
+            "music" : [
+                "Jazz"
+            ],
+            "acts" : [
+                    "Kurt Elling",
+                    "Herbie Hancock",
+                    "Kurt Rosenwinkel"
+            ],
+            "location" : "Niš",
+            "country" : "Serbia",
+            "shortDescription" : "Possibly Serbia's hidden gem when it comes to festivals, the locals favorite in the beautiful town of Niš",
+            "longDescription" : "Nišville is an annual summer music festival held in the Ancient Fortress of Niš, Serbia. From the festival's very beginning, its concept has been based on presenting the ‘traditional’ jazz forms together with their fusion with the ethnic tradition from the different parts of the world, especially from the Balkans",
+            "__v" : 1,
+            "jumbotronImage" : "http://media.2017.nisville.com/2018/08/nisville-2-1.jpg",
+            "thumbnailImage" : "http://dnevnikjuga.rs/wp-content/uploads/2017/08/2a3a7e06a05b7b36e952013fdb5d70ba.jpg",
+            "eurTicketPrice": 20
         }
     ]
 }

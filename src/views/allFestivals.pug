@@ -1,8 +1,12 @@
 extends layout.pug
 
+block additionalStyles
+    style(type="text/css")
+        | .jumbotron{ background-image: url('https://s3-eu-west-1.amazonaws.com/kobra-web/swedenrock/image/large/SRF_publik_035_2.jpg'); background-size: cover; color:white; background-position: center 40%}
+
 block content
     .jumbotron.text-center.mt-5.bg-secondary
-        h1.display-4 Festivals
+        h1.display-4.font-weight-bold Festivals
         p.lead
             | The feeling that keeps us moving
     h1#speakers.display-4.text-center.my-5.text-muted Find your festival
@@ -10,11 +14,13 @@ block content
         .row
             .col-md-6.mx-auto
                 #custom-search-input
-                    .input-group.col-md-12
-                        input.form-control.input-lg(type='text', placeholder='Search..')
-                        span.input-group-btn
-                            button.btn.btn-default.btn-lg(type='button')
-                                span.glyphicon.glyphicon-star(aria-hidden='true')
+                    form(action='/festivals/search', method='GET')
+                        .input-group.col-md-12
+                            input.form-control.input-lg(type='text', placeholder='Search..', name='searchQuery')
+                            span.input-group-btn
+                                button.btn.btn-secondary.btn-lg(type='submit')
+                                    img(src="/static/images/magnifier.png", alt="Magnifying glass")
+                                
     #festivalCards.container.mb-5
         .row
             each festival in festivals
@@ -29,5 +35,5 @@ block content
                                 .btn-group
                                     a(href=`/festivals/${festival.name}`)
                                         button.btn.btn-sm.btn-outline-secondary(type='button') See More
-                                small.text-muted 9 mins
+                                small.text-muted #{festival.location}, #{festival.country}
             

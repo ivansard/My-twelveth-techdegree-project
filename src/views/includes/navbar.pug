@@ -3,6 +3,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
         if !currentUser
           a.navbar-brand.order-1(href='/users/login') LOG IN
         else
+          a.navbar-brand.order-1(href='/users/profile') PROFILE
           a.navbar-brand.order-1(href='/users/logout') LOG OUT
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
           span.navbar-toggler-icon

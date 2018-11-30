@@ -1,15 +1,19 @@
 extends layout.pug
 
+block additionalStyles
+  style(type="text/css")
+    | .jumbotron{ background-image: url('http://www.airforcefestival.com/wp-content/uploads/2017/10/21993093_1329727370488774_6498658425583426378_o-1024x576.jpg'); background-size: cover; color:white; background-position: center 65%}
+
 block content
   .jumbotron.jumbotron-fluid.bg-info.text-white
     .container.text-sm-center.pt-5
-      h1.display-3 Festival Helper
+      h1.display-3.font-weight-bold Festival Helper
       p.lead A guide to festival people, from festival people. Hope you enjoy
       .btn-group.mt-4(role='group', aria-label='Callout buttons')
         a(href='/users/register')
           button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#register') Register now
         a.btn.btn-light.btn-lg(href='#speakers') Festivals
-  #about.container.pt-4
+  #about.container.pt-2
     .row
         .col-lg.order-lg-2
           h3.mb-4 Why?
@@ -26,8 +30,7 @@ block content
           p
             | Apart from preparing for the next festival, you could find your adventure partners right here!
     h1#speakers.display-4.text-center.my-5.text-muted Find your groove
-    p FESTIVAL CARDS SHOULD GO HERE
-    .album.py-5.bg-light
+    .album.bg-light
     .row
       each festival in festivals
         .col-md-4
@@ -41,80 +44,13 @@ block content
                 .btn-group
                   a(href=`/festivals/${festival.name}`)
                     button.btn.btn-sm.btn-outline-secondary(type='button') See More
-                small.text-muted 9 mins
+                small.text-muted #{festival.location}, #{festival.country}
     a(href='/festivals')
       button.btn.btn-primary.btn-block(type='button') See all festivals
     hr
-    button.btn.btn-outline-info.btn-lg.d-block.mx-auto.my-5(type='button', data-toggle='modal', data-target='#register') Don&apos;t Miss Out, Register Now
+    a(href='/users/register')
+      button.btn.btn-outline-info.btn-lg.d-block.mx-auto.my-5(type='button') Sign Up Now!
 
-  #register.modal.fade(tabindex='-1', role='dialog', aria-labelledby='register form', aria-hidden='true')
-    .modal-dialog(role='document')
-      .modal-content
-        .modal-header.bg-info.text-white
-          h5#exampleModalLongTitle.modal-title Register for Conf
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') &times;
-        .modal-body
-          form
-            .alert.alert-warning.alert-dismissible.fade.show(role='alert')
-              strong Hurry!
-              |  Discount period lasts only two more days!
-              button.close(type='button', data-dismiss='alert', aria-label='Close')
-                span(aria-hidden='true') &times;
-            h5.mb-5 Basic info
-            .form-group
-              label(for='name') Name:
-              input#name.form-control(type='text')
-            .form-group
-              label(for='email') Email:
-              input#email.form-control(type='email')
-            .form-group
-              label(for='role') Role:
-              select#role.form-control
-                option(value='1') Role 1
-                option(value='2') Role 2
-                option(value='3') Role 3
-            hr.my-4
-            h5.mb-5 Which topics interest you the most
-            .form-check
-              label.form-check-label
-                input.custom-control-input(type='checkbox')
-                span.custom-control-indicator
-                span.custom-control-description Node
-            .form-check
-              label.form-check-label
-                input.custom-control-input(type='checkbox')
-                span.custom-control-indicator
-                span.custom-control-description Angular
-            .form-check
-              label.form-check-label
-                input.custom-control-input(type='checkbox')
-                span.custom-control-indicator
-                span.custom-control-description React
-            hr.my-4
-            h5.mb-4 Payment info
-            .form-row
-              .col-lg-6.form-group
-                label(for='cc-num') Card Number:
-                input#cc-num.form-control(type='text')
-              .col-lg.form-group
-                label(for='zip') Zip Code:
-                input#zip.form-control(type='text')
-              .col-lg.form-group
-                label(for='cvv') CVV:
-                input#cvv.form-control(type='text')
-            .form-row
-              label.col-lg-12 Expiration date:
-              .form-group.col-lg-8
-                select#exp-month.custom-select.form-control
-                  option(value='1') 1 - January
-                  option(value='2') 2 - February
-              .form-group.col-lg-4
-                select#exp-year.custom-select.form-control
-                  option(value='2016') 2016
-                  option(value='2017') 2017
-            hr.my-4
-            button.btn.btn-primary(type='submit') Submit
 
   include includes/footer.pug
 

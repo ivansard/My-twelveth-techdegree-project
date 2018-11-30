@@ -1,15 +1,57 @@
 extends layout
 
+block additionalStyles
+
+    style(type="text/css")
+        | .jumbotron{ background-image: url('https://www.everfest.com/system/images/W1siZiIsIjIwMTUvMDkvMTYvMTgvMjcvNTIvMzIzL0J1cm5pbmdfTWFuXzIwMTVfR2FsZW5fT2FrZXMgLSA5OSBvZiAxNjguanBnIl1d/Burning_Man_2015_Galen_Oakes%20-%2099%20of%20168.jpg'); background-size: cover; color:white; background-position: center 20%}
+
 block content
     .jumbotron.jumbotron-fluid.bg-info.text-white
         .container.text-sm-center.pt-5
-            h1.display-3 #{user.firstName} #{user.lastName}
+            h1.display-3.font-weight-bold #{user.firstName} #{user.lastName}
             p.lead Welcome to your profile page
     .main.container.clearfix
+        table.table
+            thead
+                tr
+                    th(scope='col') Favorite Artist
+                    th(scope='col') Favorite Genres
+            tbody
+                tr
+                        td #{user.favoriteArtist}
+                        td #{user.favoriteGenres.join(', ')}
+        .row.my-3
+            .col.text-center
+                h2 Based on your musical preferences, we recommend:
         .row
-            .col-md-8.col-md-offset-2
-                //- h1.display-4
-                //-     img.avatar.img-circle.hidden-xs-down(src='/static/images/avatar.png', alt='avatar')
-                //-     | #{user.firstName} #{user.lastName}
-                h2.favorite-artist Favorite Artist
-                | #{user.favoriteArtist}
+            each festival in genreFestivals
+                .col-md-4.mx-auto
+                    .card.mb-4.shadow-sm
+                        img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Festival image', style='height: 225px; width: 100%; display: block;', src=`${festival.thumbnailImage}`, data-holder-rendered='true')
+                        .card-body
+                            h3.text-center #{festival.name}
+                            p.card-text
+                                | #{festival.shortDescription}
+                            .d-flex.justify-content-between.align-items-center
+                                .btn-group
+                                    a(href=`/festivals/${festival.name}`)
+                                        button.btn.btn-sm.btn-outline-secondary(type='button') See More
+                                small.text-muted #{festival.location}, #{festival.country}
+        hr
+        .row
+            .col.text-center
+                h2 Based on your favorite artist, we recommend:
+        .row.my-3
+            each festival in artistFestivals
+                .col-md-4.mx-auto
+                    .card.mb-4.shadow-sm
+                        img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Festival image', style='height: 225px; width: 100%; display: block;', src=`${festival.thumbnailImage}`, data-holder-rendered='true')
+                        .card-body
+                            h3.text-center #{festival.name}
+                            p.card-text
+                                | #{festival.shortDescription}
+                            .d-flex.justify-content-between.align-items-center
+                                .btn-group
+                                    a(href=`/festivals/${festival.name}`)
+                                        button.btn.btn-sm.btn-outline-secondary(type='button') See More
+                                small.text-muted #{festival.location}, #{festival.country}

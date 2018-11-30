@@ -1,33 +1,37 @@
 extends layout
 
+block additionalStyles
+    style(type="text/css")
+        | .jumbotron{ background-image: url('https://static1.squarespace.com/static/5a83a7c76957dab704eab014/t/5a9cbc338165f5587479319b/1520221240601/voodoo1.jpg'); background-size: cover; color:white; background-position: center 60%}
+
 block content
     .jumbotron.text-center.mt-5.bg-secondary
-        h1.display-4 Sign Up
+        h1.display-4.font-weight-bold Sign Up
         p.lead
             | Share the energy and help with others
     .container
-        form.my-5(method='POST' action='/users/register')
+        form#registrationForm.my-5(method='POST' action='/users/register')
             .form-row
                 .form-group.col-md-6
                     label(for='firstName') First Name
-                    input#inputEmail4.form-control(type='text', placeholder='First Name', name='firstName')
+                    input#firstName.form-control(type='text' placeholder='First Name', name='firstName')
                 .form-group.col-md-6
                     label(for='lastName') Last Name
-                    input#inputPassword4.form-control(type='text', placeholder='Last Name', name='lastName')
+                    input#lastName.form-control(type='text', placeholder='Last Name', name='lastName')
                 .form-group.col-md-6
                     label(for='email') Email
-                    input#inputEmail4.form-control(type='email', placeholder='Email', name='emailAddress')
+                    input#emailAddress.form-control(type='email', placeholder='Email', name='emailAddress')
                 .form-group.col-md-6
                     label(for='username') Username
-                    input#inputEmail4.form-control(type='text', placeholder='Username', name='username')
+                    input#username.form-control(type='text', placeholder='Username', name='username')
                 .form-group.col-md-6
                     label(for='password') Password
-                    input#inputAddress2.form-control(type='password', placeholder='Password', name='password')
+                    input#password.form-control(type='password', placeholder='Password', name='password')
                 .form-group.col-md-6
                     label(for='confirmPassword') Confirm password
-                    input#inputAddress.form-control(type='password', placeholder='Confirm password', name='confirmPassword')
+                    input#confirmPassword.form-control(type='password', placeholder='Confirm password', name='confirmPassword')
             hr
-            p This part isn't obligatory, but it will allow you to get a better experience
+            h5.text-center This part isn't obligatory, but it will allow you to get a better experience
             .form-row
                 .form-group.col-md-6
                     label(for='favoriteArtist') Favorite Artist
@@ -285,19 +289,38 @@ block content
                         option(value='YE') Yemen
                         option(value='ZM') Zambia
                         option(value='ZW') Zimbabwe
-            p 
-                h4 Select your favorite music, so we can recommend some festivals for you
-            .form-check.form-check-inline
-                input#rockCheck.form-check-input(type='checkbox', value='rock', name='favoriteGenres')
-                label.form-check-label(for='rockCheck')
-                    h5 Rock
-            .form-check.form-check-inline
-                input#technoCheck.form-check-input(type='checkbox', value='techno', name='favoriteGenres')
-                label.form-check-label(for='technoCheck')
-                    h5 Techno
-            .form-check.form-check-inline
-                input#funkCheck.form-check-input(type='checkbox', value='funk', name='favoriteGenres')
-                label.form-check-label(for='funkCheck')
-                    h5 Funk
+            
+            h5.text-center Select your favorite music, so we can recommend some festivals for you
+            .form-row.mt-5.mb-3
+                .col-md-2
+                    .form-check.d-inline-block
+                        input#rockCheck.form-check-input(type='checkbox', value='Rock', name='favoriteGenres')
+                        label.form-check-label(for='rockCheck')
+                            h5 Rock
+                .col-md-2
+                    .form-check.d-inline-block
+                        input#technoCheck.form-check-input(type='checkbox', value='Techno', name='favoriteGenres')
+                        label.form-check-label(for='technoCheck')
+                            h5 Techno
+                .col-md-2
+                    .form-check.d-inline-block
+                        input#funkCheck.form-check-input(type='checkbox', value='Funk', name='favoriteGenres')
+                        label.form-check-label(for='funkCheck')
+                            h5 Funk
+                .col-md-2
+                    .form-check.d-inline-block
+                        input#jazzCheck.form-check-input(type='checkbox', value='Jazz', name='favoriteGenres')
+                        label.form-check-label(for='jazzCheck')
+                            h5 Jazz
+                .col-md-2
+                    .form-check.d-inline-block
+                        input#reggaeCheck.form-check-input(type='checkbox', value='Reggae', name='favoriteGenres')
+                        label.form-check-label(for='reggaeCheck')
+                            h5 Reggae
+                .col-md-2
+                    .form-check.d-inline-block
+                        input#rapCheck.form-check-input(type='checkbox', value='Rap', name='favoriteGenres')
+                        label.form-check-label(for='rapCheck')
+                            h5 Rap
             br
             button.btn.btn-primary.btn-block(type='submit') Sign In

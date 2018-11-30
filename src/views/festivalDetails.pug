@@ -3,12 +3,12 @@ extends layout
 block additionalStyles
 
     style(type="text/css")
-        | .jumbotron{ background-image: url('#{festival.jumbotronImage}'); background-size: cover; color:white; background-position: center 20%}
+        | .jumbotron{ background-image: url('#{festival.jumbotronImage}'); background-size: cover; color:white; background-position: center 40%}
 
 block content
     .jumbotron.text-center.mt-5.bg-secondary
-        h1.display-4.font-weight-bold #{festival.name}
-        p.lead.font-weight-bold
+        h1.display-4.font-weight-bold.mb-4 #{festival.name}
+        p.lead
             | #{festival.longDescription}
     #photos.container
         .album.bg-light

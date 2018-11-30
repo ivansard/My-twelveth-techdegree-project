@@ -123,7 +123,6 @@ const FestivalSchema = new Schema({
     thumbnailImage: {type: String},
     jumbotronImage: {type: String},
     eurTicketPrice: {type: Number},
-    // questions: [{type: QuestionSchema}]
 })
 
 const Festival = mongoose.model('Festival', FestivalSchema);
