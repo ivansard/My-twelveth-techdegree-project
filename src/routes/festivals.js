@@ -9,7 +9,8 @@ const User = require('../models').User;
 const Answer = require('../models').Answer
 
 //Importing API keys
-const flickrApiKey = require('../config/config.js');
+const flickrApiKey = require('../config/config.js').flickrApiKey;
+const fixerApiKey = require('../config/config.js').fixerApiKey;
 
 //Setting the currently selected question in the request object
 router.param("qID", function(req, res, next, qID){
@@ -82,23 +83,29 @@ router.get('/:festivalName', (req, res, next) => {
                     err.status = 400;
                     return next(err)
                 }
-                //URL for the Flickr API, for searching for the festival photos
-                const url = `https://api.flickr.com/services/rest/?api_key=${flickrApiKey}&method=flickr.photos.search&tags=${festival.name}&format=json&per_page=15&page=1&nojsoncallback=1`;
+                //URL for the Flickr and Fixer API, for searching for the festival photos
+                const flickrUrl = `https://api.flickr.com/services/rest/?api_key=${flickrApiKey}&method=flickr.photos.search&tags=${festival.name}&format=json&per_page=15&page=1&nojsoncallback=1`;
+                const fixerUrl = `http://data.fixer.io/api/latest?access_key=${fixerApiKey}`;
                 //Using axios to get the data from flickr
-                axios.get(url)
+                axios.get(fixerUrl)
                 .then(response => {
-                    //Fetching the photo data
-                    let photos = response.data.photos.photo;
-                    //Mapping the retrieved photo data, to the respective urls of the photos
-                    photos = photos.map(photo => {
-                        return {
-                        url: `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
-                        id: photo.id
-                        }
-                    });
-                    // Assigning the photos to the festival
-                    festival.photos = photos;
-                    res.render('festivalDetails', {festival: festival, questions: questions});
+                    const fixerData = response.data;
+                    axios.get(flickrUrl)
+                    .then(response => {
+                        //Fetching the photo data
+                        let photos = response.data.photos.photo;
+                        //Mapping the retrieved photo data, to the respective urls of the photos
+                        photos = photos.map(photo => {
+                            return {
+                            url: `http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
+                            id: photo.id
+                            }
+                        });
+                        // Assigning the photos to the festival
+                        festival.photos = photos;
+                        res.render('festivalDetails', {festival: festival, questions: questions, fixerData: fixerData});
+                    })
+                    return fixerData;
                 })
                 .catch(function (error) {
                     return next(error);

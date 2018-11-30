@@ -20,8 +20,27 @@ block content
                             img.card-img-top(data-src='holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail', alt='Festival image', style='height: 225px; width: 100%; display: block;', src=`${photo.url}`, data-holder-rendered='true')
         hr
     #weather.container.my-4
-        h2.font-weight-bold.text-center.mb-4 Prepare yourself
-        h2.font-weight-bold.text-center.mb-4 Weather info should go here
+        h2.font-weight-bold.text-center.mb-4 Ticket Prices
+        h2.font-weight-bold.text-center.mb-4 Prices based on EUR rates from #{fixerData.date}
+        table.table
+            thead
+                tr
+                    th(scope='col') #
+                    th(scope='col') Currency
+                    th(scope='col') Value
+            tbody
+                tr
+                    th(scope='row') 1
+                        td Euro
+                        td #{festival.eurTicketPrice}
+                tr
+                    th(scope='row') 2
+                        td US Dollars
+                        td #{(festival.eurTicketPrice * fixerData.rates.USD).toFixed(2)}
+                tr
+                    th(scope='row') 3
+                        td British Pounds
+                        td #{(festival.eurTicketPrice * fixerData.rates.GBP).toFixed(2)}
         hr
 
     #questions.container.mb-4
