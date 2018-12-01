@@ -89,9 +89,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-let port = process.env.PORT || 3000
+let port = process.env.PORT || 3001;
   
-//Setting up app on port 3000
+//Setting up app on port 3001
 app.listen(port, 'localhost', () => {
     console.log(`Server running on port ${port}`);
 });
