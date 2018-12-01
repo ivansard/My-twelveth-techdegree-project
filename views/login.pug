@@ -1,8 +1,14 @@
 extends layout
+
+block additionalStyles
+    style(type="text/css")
+        | .jumbotron{ background-image: url('https://s3.amazonaws.com/fest-uploads/kcfinder/images/_MG_1217%20-%20Version%202.jpg'); background-size: cover; color:white; background-position: center 40%}
+
+
 block content
     .jumbotron.jumbotron-fluid.bg-info.text-white
         .container.text-sm-center.pt-5
-            h1.display-3 Log-In
+            h1.display-3.font-weight-bold Log In
             p.lead Join the rest of the party
     .container.mt-5
         form.my-5(method='POST' action='/users/login')

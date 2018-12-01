@@ -24,7 +24,7 @@ router.get('/login', mid.loggedOut, (req, res, next) => {
 
 //POST /login
 //Authenticates the users credentials, and if they are valid, renders the user's profile page
-router.post('/login', (req, res, next) => {
+router.post('/login',  (req, res, next) => {
     //Checking for the submitted credentials
     if(req.body.emailAddress && req.body.password){
         User.authenticate(req.body.emailAddress, req.body.password, function(error, user){

@@ -8,6 +8,9 @@ const Question = require('../models').Question;
 const User = require('../models').User;
 const Answer = require('../models').Answer
 
+//Custom middleware
+const mid = require('../middleware/index');
+
 //Importing API keys
 const flickrApiKey = require('../config/config.js').flickrApiKey;
 const fixerApiKey = require('../config/config.js').fixerApiKey;
@@ -137,7 +140,7 @@ router.get('/:festivalName', (req, res, next) => {
 
 //POST /festivals/:festivalName
 //Method for posting a question to a specific festival
-router.post('/:festivalName', (req, res, next) => {
+router.post('/:festivalName', mid.requiresLogin, (req, res, next) => {
     //Getting the specified festival
     const festival = req.festival
     //Check if everything was submitted on the form
@@ -218,7 +221,7 @@ router.post('/:festivalName/questions/:qID/answers', (req, res, next) =>{
 
 //POST /festivals/:festivalName/:qID/answers/:aID/vote-:dir
 //Route which allows users to up or down vote on an answer
-router.get('/:festivalName/questions/:qID/answers/:aID/vote-:dir', (req, res, next) =>{
+router.get('/:festivalName/questions/:qID/answers/:aID/vote-:dir', mid.requiresLogin, (req, res, next) =>{
     //Validating that the :dir parameter is either up or down
     if(req.params.dir.search(/^(up|down)$/) === -1){
         let error = new Error('Not found');
@@ -230,7 +233,7 @@ router.get('/:festivalName/questions/:qID/answers/:aID/vote-:dir', (req, res, ne
         const answer = req.answer;
         //A user cannot answer his own question
         if(answer.user.equals(req.session.userId)){
-            let error = new Error('You can not vote your own question');
+            let error = new Error('You can not vote your own answer');
             return next(error);
         }
         //Finding the answer in the questions array

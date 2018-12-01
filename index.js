@@ -16,11 +16,11 @@ const db = mongoose.connection;
 
 db.on('error', error => {
   console.log('Connection error:', error);
-})
+});
 
 db.once('open', () => {
   console.log('Db connection successful');
-})
+});
 
 //Setting up promises in mongoose
 mongoose.Promise = global.Promise;
@@ -34,26 +34,24 @@ app.use(session({
     secret: 'Capstone project',
     resave: true,
     saveUninitialized: false
-  }))
+  }));
 
 //Making the currently logged in user available to all our templates
 app.use( (req, res, next) => {
   res.locals.currentUser = req.session.userId;
   next();
-})
+});
 
 //Importing and setting route handlers
 
 const festivals = require('./routes/festivals');
 const users = require('./routes/users');
-const questions = require('./routes/questions');
 
 app.use('/festivals', festivals);
 app.use('/users', users);
-app.use('/questions', questions);
 
 //Accessing static server
-app.use('/static', express.static('public'))
+app.use('/static', express.static('public'));
 
 //Setting pug as view engine
 app.set('view engine', 'pug');
@@ -67,7 +65,19 @@ app.get('/', (req, res, next) => {
             } else{
               res.render('home', {festivals: festivals});
             }
-          })
+          });
+});
+
+//Renders about page
+app.get('/about', (req, res, next) => {
+  res.render('about');
+})
+
+//Catch 404 error and forward to error handler
+app.use( (req, res, next) => {
+  let error = new Error('Not found');
+  error.status = 404;
+  next(error);
 })
 
 //Error handling widdleware
@@ -82,4 +92,4 @@ app.use(function(err, req, res, next) {
 //Setting up app on port 3000
 app.listen(3000, 'localhost', () => {
     console.log('Server running on port 3000');
-})
+});

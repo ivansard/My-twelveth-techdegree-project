@@ -55,8 +55,18 @@ block content
                         h5.mb-4.font-weight-bold #{answer.answerText}
                 hr
         .row
-            .col-md-6.mx-auto.mt-4
-                button.btn.btn-primary.btn-lg.btn-block(type='button', data-toggle='modal', data-target='#exampleModal') Give an answer
+            if !currentUser
+                .col-md-12.mb-4
+                    h3.text-center Want to give an answer? Just sign up!
+                .col-md-6
+                        a(href='/users/register')
+                            button.btn.btn-primary.btn-lg.btn-block(type='button') Sign Up
+                .col-md-6
+                        a(href='/users/login')
+                            button.btn.btn-primary.btn-lg.btn-block(type='button') Login
+            else
+                .col-md-6.mx-auto.mt-4
+                    button.btn.btn-primary.btn-lg.btn-block(type='button', data-toggle='modal', data-target='#exampleModal') Give an answer
         hr.my-5
     #exampleModal.modal(tabindex='-1', role='dialog')
         .modal-dialog(role='document')

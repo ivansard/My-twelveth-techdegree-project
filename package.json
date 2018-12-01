@@ -4,7 +4,11 @@
   "description": "My final techdegree project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "8.12.0"
   },
   "repository": {
     "type": "git",
@@ -16,5 +20,19 @@
   "bugs": {
     "url": "https://github.com/ivansard/Techdegree-Project-12/issues"
   },
-  "homepage": "https://github.com/ivansard/Techdegree-Project-12#readme"
+  "homepage": "https://github.com/ivansard/Techdegree-Project-12#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.3.13",
+    "popper.js": "^1.14.5",
+    "pug": "^2.0.3",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.6"
+  }
 }
