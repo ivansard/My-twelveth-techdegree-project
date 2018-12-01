@@ -92,6 +92,6 @@ app.use(function(err, req, res, next) {
 let port = process.env.PORT || 3001;
   
 //Setting up app on port 3001
-app.listen(port, 'localhost', () => {
+app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
