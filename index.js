@@ -11,7 +11,7 @@ const Festival = require('./models').Festival;
 const app = express();
 
 // Setting up mongoose
-mongoose.connect('mongodb://localhost:27017/capstone-project');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/capstone-project');
 const db = mongoose.connection;
 
 db.on('error', error => {
